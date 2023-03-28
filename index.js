@@ -9,6 +9,11 @@ app.get("/",(req,res)=>{
      res.send("hello")        
 })
 
+app.get("/user",(req,res)=>{
+    res.send("hello bibin")        
+})
+
+
 
 
 app.listen(PORT,()=>{
