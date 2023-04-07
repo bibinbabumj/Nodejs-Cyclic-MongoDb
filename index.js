@@ -35,7 +35,7 @@ app.get("/user",(req,res)=>{
 })
 
 
-app.get("/user", async(req,res)=>{
+app.get("/profile", async(req,res)=>{
    try {
     await User.insertMany([
         {
