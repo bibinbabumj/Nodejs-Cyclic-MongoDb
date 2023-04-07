@@ -33,12 +33,13 @@ const connectDb= async()=>{
 }
 
 app.get("/user",async(req,res)=>{
-     const user=await User.find()  
-     if(user){
-        res.json(user)
-     }else{
-        res.send("something error")
-     }
+    // const user=await User.find()  
+    // if(user){
+    //    res.json(user)
+    // }else{
+    //    res.send("something error")
+    // }
+    res.send("user")
 })
 
 app.get("/skills",async(req,res)=>{
