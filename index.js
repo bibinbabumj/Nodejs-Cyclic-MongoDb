@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const connectDb= async()=>{
     try {
-        const conn=await mongosse.connect(process.env.MONGO_URI);
+        const conn=await mongoose.connect(process.env.MONGO_URI);
     } catch (error) {
         console.log(error)
         process.exit(1)
