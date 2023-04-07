@@ -1,5 +1,5 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const mongosse = require("mongoose");
 const dotenv = require("dotenv");
 
 /////////
