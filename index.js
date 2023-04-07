@@ -1,20 +1,25 @@
-require('dotenv').config()
 const express = require("express");
-const mongosse=require("mongoose")
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+/////////
+const User = require("./models/user");
+const Skill = require("./models/skills");
+const Hobbies = require("./models/hobbies");
+const Education = require("./models/education");
+const Project = require("./models/projects");
+const Experience = require("./models/experience");
+
+
+dotenv.config();
 const app = express();
-const PORT=process.env.PORT||3000
-mongosse.set("strictQuery",false);
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+const PORT = process.env.PORT || 3000;
+mongoose.set("strictQuery", false);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
-//////
-const User=require('./models/user')
-const Skill=require('./models/skills')
-const Hobbies=require('./models/hobbies')
-const Education=require('./models/education')
-const Project=require('./models/projects')
-const Experience=require('./models/experience')
+
 
 
 
@@ -29,7 +34,6 @@ const connectDb= async()=>{
 
 app.get("/user",async(req,res)=>{
      const user=await User.find()  
-     
      if(user){
         res.json(user)
      }else{
@@ -105,28 +109,6 @@ try {
 }
 
 })
-
-
-/*
-app.get("/profile", async(req,res)=>{
-   try {
-    await User.insertMany([
-        {
-            title:"fcvgyhujik",
-            body:"dfghjk"
-        },
-        {
-            title:"fcvgyhujik",
-            body:"dfghjk"
-        }
-    ])
-
-   } catch (error) {
-    console.log(error)
-   }       
-})
-*/
-
 
 
 connectDb().then(()=>{
