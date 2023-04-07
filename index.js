@@ -9,6 +9,7 @@ const Hobbies = require("./models/hobbies");
 const Education = require("./models/education");
 const Project = require("./models/projects");
 const Experience = require("./models/experience");
+const { user } = require("firebase-functions/v1/auth");
 
 
 dotenv.config();
@@ -35,8 +36,11 @@ const connectDb= async()=>{
 app.get("/user",async(req,res)=>{
 try {
     const users = await User.find();
-    const responseData = {users}
-    res.status(200).json(responseData);
+    if (users.length > 0) {
+      res.status(200).json(users[0]);
+    } else {
+      res.status(404).send("No users found");
+    }
 } catch (error) {
     console.error(error.message);
     res.status(500).send("Something went wrong");
