@@ -1,12 +1,33 @@
 require('dotenv').config()
 const express = require("express");
+const mongosse=require("mongoose")
 const app = express();
 const PORT=process.env.PORT||3000
+mongosse.set("strictQuery",false);
+
+//////
+const User=require('./models/user')
+
+
+const connectDb= async()=>{
+    try {
+        const conn=await mongosse.connect(process.env.MONGO_URI);
+    } catch (error) {
+        console.log(error)
+        process.exit(1)
+    } 
+}
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-app.get("/",(req,res)=>{
-     res.send(strObject)        
+app.get("/",async(req,res)=>{
+     const user=await User.find()  
+     
+     if(user){
+        res.json(user)
+     }else{
+        res.send("something error")
+     }
 })
 
 app.get("/user",(req,res)=>{
@@ -14,11 +35,33 @@ app.get("/user",(req,res)=>{
 })
 
 
+app.get("/user", async(req,res)=>{
+   try {
+    await User.insertMany([
+        {
+            title:"fcvgyhujik",
+            body:"dfghjk"
+        },
+        {
+            title:"fcvgyhujik",
+            body:"dfghjk"
+        }
+    ])
 
-
-app.listen(PORT,()=>{
-    console.log("listen")
+   } catch (error) {
+    console.log(error)
+   }       
 })
+
+
+
+connectDb().then(()=>{
+    app.listen(PORT,()=>{
+        console.log("listen")
+    })  
+})
+
+
 
  const strObject={
         user_id:100,
