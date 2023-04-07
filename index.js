@@ -14,7 +14,8 @@ const Skill=require('./models/skills')
 const Hobbies=require('./models/hobbies')
 const Education=require('./models/education')
 const Project=require('./models/projects')
-const Experience=require('./models/experience')
+const Experience=require('./models/experience');
+const education = require('./models/education');
 
 
 
