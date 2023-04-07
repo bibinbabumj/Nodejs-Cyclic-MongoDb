@@ -36,5 +36,5 @@ const EducationSchema= new Schema({
     }
 })
 
-module.exports=mongosse.model('education',EducationSchema)
+module.exports=mongosse.model('Projects',EducationSchema)
 
