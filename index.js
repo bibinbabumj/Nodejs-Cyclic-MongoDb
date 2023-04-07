@@ -34,7 +34,7 @@ app.get("/user",(req,res)=>{
     res.send("hello bibin")        
 })
 
-
+/*
 app.get("/profile", async(req,res)=>{
    try {
     await User.insertMany([
@@ -52,6 +52,7 @@ app.get("/profile", async(req,res)=>{
     console.log(error)
    }       
 })
+*/
 
 
 
