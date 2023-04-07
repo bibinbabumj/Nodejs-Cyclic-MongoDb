@@ -33,13 +33,13 @@ const connectDb= async()=>{
 }
 
 app.get("/user",async(req,res)=>{
-     const user=await User.find()  
-     if(user){
-       res.json(user)
-    }else{
-       res.send("something error")
+try {
+    const users = await User.find();
+    res.status(200).json(users);
+} catch (error) {
+    console.error(error.message);
+    res.status(500).send("Something went wrong");
 }
-    res.send("user")
 })
 
 app.get("/skills",async(req,res)=>{
@@ -50,6 +50,7 @@ app.get("/skills",async(req,res)=>{
        res.send("something error")
     }
 })
+
 app.get("/hobbies",async(req,res)=>{
     const hobbies=await Hobbies.find()  
     if(hobbies){
@@ -87,7 +88,7 @@ app.get("/experience",async(req,res)=>{
 })
 
 
-app.get("/",async(req,res)=>{
+app.get("/all_details",async(req,res)=>{
 try {
     const user=await User.find()  
     const skills=await Skill.find() 
