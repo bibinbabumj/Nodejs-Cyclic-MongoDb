@@ -2,10 +2,6 @@ const mongosse=require("mongoose")
 const Schema= mongosse.Schema;
 
 const UserSchema= new Schema({
-    _id:{
-        type:Int,
-        required:true
-    },
     name:{
         type:String,
         required:true
