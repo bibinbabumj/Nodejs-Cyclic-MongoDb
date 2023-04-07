@@ -14,6 +14,14 @@ const UserSchema= new Schema({
         type:String,
         required:true
     },
+    user_email:{
+        type:String,
+        required:true
+    },
+    user_mobile:{
+        type:String,
+        required:true
+    },
 
     profile_url:{
         type:String,
