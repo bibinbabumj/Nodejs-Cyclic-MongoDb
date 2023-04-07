@@ -4,9 +4,18 @@ const mongosse=require("mongoose")
 const app = express();
 const PORT=process.env.PORT||3000
 mongosse.set("strictQuery",false);
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
 
 //////
 const User=require('./models/user')
+const Skill=require('./models/skills')
+const Hobbies=require('./models/hobbies')
+const Education=require('./models/education')
+const Project=require('./models/projects')
+const Experience=require('./models/experience')
+
 
 
 const connectDb= async()=>{
@@ -17,10 +26,8 @@ const connectDb= async()=>{
         process.exit(1)
     } 
 }
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
 
-app.get("/",async(req,res)=>{
+app.get("/user",async(req,res)=>{
      const user=await User.find()  
      
      if(user){
@@ -30,9 +37,75 @@ app.get("/",async(req,res)=>{
      }
 })
 
-app.get("/user",(req,res)=>{
-    res.send("hello bibin")        
+app.get("/skills",async(req,res)=>{
+    const skills=await Skill.find()  
+    if(skills){
+       res.json(skills)
+    }else{
+       res.send("something error")
+    }
 })
+app.get("/hobbies",async(req,res)=>{
+    const hobbies=await Hobbies.find()  
+    if(hobbies){
+       res.json(hobbies)
+    }else{
+       res.send("something error")
+    }
+})
+
+app.get("/education",async(req,res)=>{
+    const education=await Education.find()  
+    if(education){
+       res.json(education)
+    }else{
+       res.send("something error")
+    }
+})
+
+app.get("/project",async(req,res)=>{
+    const project=await Project.find()  
+    if(project){
+       res.json(project)
+    }else{
+       res.send("something error")
+    }
+})
+
+app.get("/experience",async(req,res)=>{
+    const experience=await Experience.find()  
+    if(experience){
+       res.json(experience)
+    }else{
+       res.send("something error")
+    }
+})
+
+
+app.get("/",async(req,res)=>{
+try {
+    const user=await User.find()  
+    const skills=await Skill.find() 
+    const hobbies=await Hobbies.find()  
+    const education=await Education.find()  
+    const project=await Project.find()  
+    const experience=await Experience.find() 
+    const responseData = {
+        user: user,
+        skills: skills,
+        hobbies: hobbies,
+        education: education,
+        project: project,
+        experience: experience,
+      };
+      res.json(responseData);
+
+} catch (error) {
+    res.send("something error");
+}
+
+})
+
 
 /*
 app.get("/profile", async(req,res)=>{
@@ -62,86 +135,3 @@ connectDb().then(()=>{
     })  
 })
 
-
-
- const strObject={
-        user_id:100,
-        name:"bibin",
-        profile_url: "fb",
-        github_url: "fb",
-        gitlab_url: "fb",
-        linkedin_url: "fb", 
-        skills: [
-            {id:1,
-            user_id:"100",
-            skill_name:"Java"
-            },
-             {id:1,
-            user_id:"100",
-            skill_name:"Java"
-            }
-        ],
-        hobbies: [
-            {id:1,
-            user_id:"100",
-            hobbies_name:"Read"
-            },
-             {id:1,
-            user_id:"100",
-            hobbies_name:"Write"
-            }
-        ],
-        education: [
-            {id:1,
-            user_id:"100",
-            course:"Read",
-            course_year:"100",
-            course_university_name:"Read",
-            course_name:"100",
-            course_location:"Read"
-            },
-             {id:1,
-            user_id:"100",
-            course:"Read",
-            course_year:"100",
-            course_university_name:"Read",
-            course_name:"100",
-            course_location:"Read"
-            }
-        ],
-        experience: [
-            {id:1,
-            user_id:"100",
-            experience_work_role:"Read",
-            experience_company_name:"100",
-            experience_year:"Read",
-            experience_location:"100",
-            experience_responsibility:"Read"
-            },
-             {id:1,
-           user_id:"100",
-            experience_work_role:"Read",
-            experience_company_name:"100",
-            experience_year:"Read",
-            experience_location:"100",
-            experience_responsibility:"Read"
-            }
-        ],
-        projects: [
-            {id:1,
-            user_id:"100",
-            project_name:"Read",
-            project_company_name:"100",
-            project_duration:"Read",
-            project_details:"100"
-            },
-             {id:1,
-           user_id:"100",
-            user_id:"100",
-            project_name:"Read",
-            project_company_name:"100",
-            project_duration:"Read",
-            project_details:"100"
-            }
-        ]
-    }

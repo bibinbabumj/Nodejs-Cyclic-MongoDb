@@ -1,44 +1,40 @@
 const mongosse=require("mongoose")
 const Schema= mongosse.Schema;
 
-const UserSchema= new Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    my_self:{
-        type:String,
-        required:true
-    },
-    profile_summary:{
+const ProjectsSchema= new Schema({
+    user_id:{
         type:String,
         required:true
     },
 
-    profile_url:{
+    project_name:{
+        type:String,
+        required:true
+    }
+    ,
+
+    project_company_name:{
+        type:String,
+        required:true
+    }
+    ,
+
+    project_duration:{
+        type:String,
+        required:true
+    }
+    ,
+
+    project_details:{
         type:String,
         required:true
     },
 
-    location:{
-        type:String,
-        required:true
-    },
-
-    github_url:{
-        type:String,
-        required:true
-    },
-
-    gitlab_url:{
-        type:String,
-        required:true
-    },
-    linkedin_url:{
+    project_role:{
         type:String,
         required:true
     }
 })
 
-module.exports=mongosse.model('User',UserSchema)
+module.exports=mongosse.model('Projects',ProjectsSchema)
 
